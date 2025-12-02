@@ -1,0 +1,9 @@
+<decoder name="qlik-sense-audit">
+  <prematch>^\d+\t\.+\tCommand=</prematch>
+</decoder>
+
+<decoder name="qlik-sense-audit">
+  <parent>qlik-sense-audit</parent>
+  <regex>^(\d+)\t(\S+)\t(\S+)\t(\.+)\t(\.+)\tCommand=(\.+);Result=(\.+);ResultText=(\.+)\t(\S+)\t(\S+)\t(\.+)\t(\.+)\t(\.+)\t(\.+)\t(\.+)\t(\.+)\t(\.+)\t(\S+)\t(\.+)\t(\.+)\t(\.+)\t(\d+)\t(\.+)\t(\w+)$</regex>
+  <order>qlik.sequence, qlik.productVersion, qlik.timestamp, hostname, id, qlik.descriptionCommand, qlik.descriptionResult, qlik.descriptionResultText, qlik.proxySessionId, qlik.proxyPackageId, qlik.requestSequenceId, qlik.userDirectory, dstuser, qlik.objectId, qlik.objectName, qlik.securityClass, srcip, qlik.service, qlik.origin, qlik.context, qlik.commandName, qlik.result, qlik.message, qlik.checksum</order>
+</decoder>

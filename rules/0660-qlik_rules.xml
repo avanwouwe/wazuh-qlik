@@ -1,0 +1,52 @@
+<group name="qlik,qlik_sense,audit,">
+
+  <rule id="66500" level="3">
+    <decoded_as>qlik-sense-audit</decoded_as>
+    <description>Qlik Sense : $(qlik.message)</description>
+  </rule>
+
+  <!-- Access Denied (4xx) -->
+  <rule id="66502" level="8">
+    <if_sid>66500</if_sid>
+    <field name="qlik.result">^4\.\.$</field>
+    <description>Qlik Sense : ACCESS DENIED $(qlik.message)</description>
+    <mitre>
+      <id>T1078</id>
+    </mitre>
+    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,gdpr_IV_35.7.d,</group>
+  </rule>
+
+  <!-- Multiple access denied -->
+  <rule id="66504" level="10" frequency="5" timeframe="300" ignore="600">
+    <if_matched_sid>66502</if_matched_sid>
+    <same_user/>
+    <description>Qlik Sense : MULTIPLE ACCESS DENIED $(qlik.message)</description>
+    <mitre>
+      <id>T1110</id>
+    </mitre>
+    <group>authentication_failures,</group>
+  </rule>
+
+  <!-- Error (5xx) -->
+  <rule id="66506" level="8">
+    <if_sid>66500</if_sid>
+    <field name="qlik.result">^5\.\.$</field>
+    <description>Qlik Sense : ERROR $(qlik.message)</description>
+    <mitre>
+      <id>T1078</id>
+    </mitre>
+    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,gdpr_IV_35.7.d,</group>
+  </rule>
+
+  <!-- Multiple errors -->
+  <rule id="66508" level="10" frequency="5" timeframe="300" ignore="600">
+    <if_matched_sid>66506</if_matched_sid>
+    <same_user/>
+    <description>Qlik Sense : MULTIPLE ERRORS $(qlik.message)</description>
+    <mitre>
+      <id>T1110</id>
+    </mitre>
+    <group>authentication_failures,</group>
+  </rule>
+
+</group>
