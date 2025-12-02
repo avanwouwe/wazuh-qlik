@@ -10,7 +10,7 @@ Limitations:
 * the `@timestamp` of events is the moment of injection, not the moment of the event, which is stored in `data.qlik.timestamp`
 
 ## Installation:
-* [install wodle](/doc/install-step-1.md)
+* [install decoder and rules](/doc/install-step-1.md)
 
 
 ## Attribution
